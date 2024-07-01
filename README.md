@@ -8,6 +8,7 @@ Command to run on container: https://docs.github.com/en/actions/hosting-your-own
 Make terraform variables for token and organization name
 Github Repo for Github actions worker https://github.com/actions/runner/blob/main/.github/workflows/publish-image.yml 
 Create selfhosted worker page: https://github.com/organizations/hungerrush/settings/actions/runners/new?arch=x64&os=linux
+Github action runner guide: https://baccini-al.medium.com/how-to-containerize-a-github-actions-self-hosted-runner-5994cc08b9fb
 
 Manually created resources:
 - Service Principle | App Registration - Given scoped access to create resources on subscription.
