@@ -1,0 +1,33 @@
+name: build_github_runner_container_image
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - containers/github_runner_container/Dockerfile
+  workflow_dispatch:
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract repository name
+        id: repo_name
+        run: echo "REPO_NAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)" >> $GITHUB_ENV
+
+      - name: ACR build
+        id: acr
+        uses: azure/acr-build@v1
+        with:
+          service_principal: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME  }}
+          service_principal_password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
+          tenant: ${{ secrets.AZURE_TENANT_ID }}
+          registry: ${{ vars.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}
+          repository: ${{ env.REPO_NAME }}
+          image: github_runner_container
+          git_access_token: ${{ secrets.GITHUB_TOKEN }}
+          # folder: ../Containers/Example_Execution_Container/
+          dockerfile: ./containers/github_runner_container/Dockerfile
+          branch: main
+          tag: latest
+          # build_args: '[{"arg_one":"value_one"}, {"arg_two":"value_two"}]'
