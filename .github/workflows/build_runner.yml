@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Extract repository name
         id: repo_name
-        run: echo "REPO_NAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)" >> $GITHUB_ENV
+        run: echo "REPO_NAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2 | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: ACR build
         id: acr
