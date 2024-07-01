@@ -36,7 +36,7 @@ jobs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
     defaults:
       run:
-        working-directory: ${{ env.tf_actions_working_dir }} -backend-config="key=$GITHUB_REPOSITORY.tfstate" -backend-config="container_name=tfstate" -backend-config="resource_group_name=${{ vars.STATE_RG_NAME }}" -backend-config="storage_account_name=${{ vars.STATE_SA_NAME }}"
+        working-directory: ${{ env.tf_actions_working_dir }} -backend-config="key=${{ env.GITHUB_REPOSITORY }}.tfstate" -backend-config="container_name=tfstate" -backend-config="resource_group_name=${{ vars.STATE_RG_NAME }}" -backend-config="storage_account_name=${{ vars.STATE_SA_NAME }}"
 
     steps:
     - name: 'Extract repository name'
