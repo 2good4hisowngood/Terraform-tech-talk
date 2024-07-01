@@ -65,8 +65,6 @@ jobs:
     # An exit code of 0 indicated no changes, 1 a terraform failure, 2 there are pending changes.
     - name: Terraform Plan
       id: tf-plan
-      with:
-        tf_actions_working_dir: "${{ env.tf_actions_working_dir }}"
       run: |
         export exitcode=0
         terraform plan -detailed-exitcode -no-color -out tfplan -var "Github_api_token=${{ secrets.GITHUB_API_TOKEN }}" || export exitcode=$?
