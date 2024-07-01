@@ -14,10 +14,10 @@ terraform {
     }
   }
   backend "azurerm" {
-      resource_group_name  = "DevOpsAutomationRG"
-      storage_account_name = "devopsautomationrgsa"
+      resource_group_name  = "personal-devops"
+      storage_account_name = "mypersonalterraform"
       container_name       = "tfstate"
-      key                  = "dev-cloudflare-records.tfstate"
+      key                  = "test.tfstate"
   }
 }
 
