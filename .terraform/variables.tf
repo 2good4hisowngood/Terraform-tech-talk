@@ -21,6 +21,11 @@ variable "acr_password" {
   sensitive   = true
 }
 
+variable "acr_rg" {
+  description = "The Azure Container Registry resource group"
+  type        = string
+}
+
 # GitHub Variables
 variable "org_name" {
   description = "The name of the GitHub organization"

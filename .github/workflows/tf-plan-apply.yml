@@ -28,6 +28,7 @@ env:
   TF_VAR_acr_server: ${{ vars.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}
   TF_VAR_acr_username: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
   TF_VAR_acr_password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
+  TF_VAR_acr_rg: ${{ vars.STATE_RG_NAME }}
 
 jobs:
   terraform-plan:
