@@ -26,6 +26,11 @@ variable "acr_rg" {
   type        = string
 }
 
+variable "token" {
+  description = "The GitHub token"
+  type        = string
+}
+
 # GitHub Variables
 variable "org_name" {
   description = "The name of the GitHub organization"
