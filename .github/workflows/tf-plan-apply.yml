@@ -21,6 +21,8 @@ env:
   ARM_CLIENT_SECRET: "${{ secrets.ARM_CLIENT_SECRET }}"
   tf_actions_working_dir: .terraform 
   tfstate_filename: "github-worker.tfstate"
+  STATE_RG_NAME: ${{ secrets.STATE_RG_NAME }}
+  STATE_SA_NAME: ${{ secrets.STATE_SA_NAME }}
 
 jobs:
   terraform-plan:
@@ -34,7 +36,7 @@ jobs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
     defaults:
       run:
-        working-directory: ${{ env.tf_actions_working_dir }} -backend-config="key=${{ env.REPO_NAME }}.tfstate" -backend-config="container_name=tfstate" -backend-config="resource_group_name=${{ secrets.STATE_RG_NAME }}" -backend-config="storage_account_name=${{ secrets.STATE_SA_NAME }}"
+        working-directory: ${{ env.tf_actions_working_dir }} -backend-config="key=${{ env.REPO_NAME }}.tfstate" -backend-config="container_name=tfstate" -backend-config="resource_group_name=${{ env.STATE_RG_NAME }}" -backend-config="storage_account_name=${{ env.STATE_SA_NAME }}"
 
     steps:
     - name: 'Extract repository name'
