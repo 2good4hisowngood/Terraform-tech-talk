@@ -19,8 +19,8 @@ jobs:
         id: acr
         uses: azure/acr-build@v1
         with:
-          service_principal: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME  }}
-          service_principal_password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
+          service_principal: ${{ secrets.AZURE_CLIENT_ID  }}
+          service_principal_password: ${{ secrets.ARM_CLIENT_SECRET }}
           tenant: ${{ vars.AZURE_TENANT_ID }}
           registry: ${{ vars.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}
           repository: ${{ env.REPO_NAME }}
