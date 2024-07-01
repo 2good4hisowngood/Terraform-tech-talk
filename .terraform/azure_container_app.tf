@@ -45,7 +45,7 @@ resource "azurerm_container_app" "example" {
         value = "2good4hisowngood/Terraform-tech-talk"
       }
       env {
-        name = TOKEN
+        name = "TOKEN"
         value = "test"
       }
     }
