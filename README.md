@@ -8,3 +8,20 @@ Command to run on container: https://docs.github.com/en/actions/hosting-your-own
 Make terraform variables for token and organization name
 Github Repo for Github actions worker https://github.com/actions/runner/blob/main/.github/workflows/publish-image.yml 
 Create selfhosted worker page: https://github.com/organizations/hungerrush/settings/actions/runners/new?arch=x64&os=linux
+
+Resources to deploy
+Azurerm
+- Resource Group
+- Log Analytics Workspace
+- Container App Env
+- (Container App)[https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_app]
+Github
+- (GitHub Action Runner Group)[https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_runner_group]
+
+Secrets:
+Azure Credentials
+    Secret
+    appid
+    subscription
+    tenant
+GitHub values
