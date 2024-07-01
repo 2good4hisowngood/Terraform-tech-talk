@@ -46,7 +46,7 @@ resource "azurerm_container_app" "example" {
       }
       env {
         name = "TOKEN"
-        value = "test"
+        value = var.token
       }
     }
   }
