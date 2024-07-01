@@ -31,6 +31,8 @@ Azure Credentials
     AZURE_TENANT_ID
     STATE_RG_NAME - The resource group with the state file container
     STATE_SA_NAME - The name of the storage account where the state files are stored.
+    AZURE_CONTAINER_REGISTRY_USERNAME - Username for ACR
+    AZURE_CONTAINER_REGISTRY_PASSWORD - Password for ACR
 GitHub values
 
 Variables:
