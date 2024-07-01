@@ -32,6 +32,9 @@ jobs:
       TF_VAR_GitHub_API_TOKEN: "${{ secrets.GITHUB_API_TOKEN }}"
     outputs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
+    defaults:
+      run:
+        working-directory: ${{ env.tf_actions_working_dir }}
 
     steps:
     - name: 'Extract repository name'
@@ -47,7 +50,6 @@ jobs:
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_wrapper: false
-        tf_actions_working_dir: "${{ env.tf_actions_working_dir }}"
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
