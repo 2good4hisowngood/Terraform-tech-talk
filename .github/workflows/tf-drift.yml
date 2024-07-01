@@ -23,8 +23,9 @@ jobs:
   terraform-plan:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
-    with:
-        tf_actions_working_dir: "${{ env.tf_actions_working_dir }}"
+    defaults:
+      run:
+        working-directory: ${{ env.tf_actions_working_dir }}
     env:
       #this is needed since we are running terraform with read-only permissions
       ARM_SKIP_PROVIDER_REGISTRATION: true
@@ -33,8 +34,8 @@ jobs:
 
     steps:
     - name: 'Extract repository name'
-        id: repo_name
-        run: echo "REPO_NAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)" >> $GITHUB_ENV
+      id: 'repo_name'
+      run: echo "REPO_NAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)" >> $GITHUB_ENV
 
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
@@ -45,21 +46,17 @@ jobs:
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_wrapper: false
-        tf_actions_working_dir: "${{ env.tf_actions_working_dir }}"
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
       with:
-        tf_actions_working_dir: "${{ env.tf_actions_working_dir }}"
         args: '-backend-config="key=${{ env.REPO_NAME }}.tfstate" -backend-config="container_name=tfstate"'
 
     # Generates an execution plan for Terraform
     # An exit code of 0 indicated no changes, 1 a terraform failure, 2 there are pending changes.
     - name: Terraform Plan
       id: tf-plan
-      with:
-        tf_actions_working_dir: "${{ env.tf_actions_working_dir }}"
       run: |
         export exitcode=0
         terraform plan -detailed-exitcode -no-color -out tfplan -var "cloudflare_api_token=${{ secrets.CLOUDFLARE_API_TOKEN }}" || export exitcode=$?

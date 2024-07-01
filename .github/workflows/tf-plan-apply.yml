@@ -35,8 +35,8 @@ jobs:
 
     steps:
     - name: 'Extract repository name'
-        id: repo_name
-        run: echo "REPO_NAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)" >> $GITHUB_ENV
+      id: repo_name
+      run: echo "REPO_NAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)" >> $GITHUB_ENV
 
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
