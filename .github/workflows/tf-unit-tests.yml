@@ -5,6 +5,7 @@ on:
 
 env:
   tf_actions_working_dir: .terraform
+  org_name: ${{ env.GITHUB_REPOSITORY_OWNER}}
 
 jobs:
   terraform-unit-tests:
@@ -33,7 +34,7 @@ jobs:
 
     # Validate terraform files
     - name: Terraform Validate
-      run: terraform validate
+      run: terraform validate -var="org_name=${{ env.org_name }}"
       # with:
       #   tf_actions_working_dir: "${{ env.tf_actions_working_dir }}"
 
