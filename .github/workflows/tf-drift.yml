@@ -32,7 +32,7 @@ jobs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
 
     steps:
-    - name: Extract repository name
+    - name: 'Extract repository name'
         id: repo_name
         run: echo "REPO_NAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)" >> $GITHUB_ENV
 
