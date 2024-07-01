@@ -30,7 +30,7 @@ resource "azurerm_container_app" "example" {
     ]
   }
   registry {
-    server   = var.acr_server
+    server   = data.azurerm_container_registry.example.login_server
     identity = azurerm_user_assigned_identity.example.id
   }
 
