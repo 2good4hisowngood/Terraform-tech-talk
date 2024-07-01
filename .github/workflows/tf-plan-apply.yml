@@ -21,8 +21,8 @@ env:
   ARM_CLIENT_SECRET: "${{ secrets.ARM_CLIENT_SECRET }}"
   tf_actions_working_dir: .terraform 
   tfstate_filename: "github-worker.tfstate"
-  STATE_RG_NAME: ${{ env.STATE_RG_NAME }}
-  STATE_SA_NAME: ${{ env.STATE_SA_NAME }}
+  STATE_RG_NAME: ${{ vars.STATE_RG_NAME }}
+  STATE_SA_NAME: ${{ vars.STATE_SA_NAME }}
 
 jobs:
   terraform-plan:
