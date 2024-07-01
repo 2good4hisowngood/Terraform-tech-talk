@@ -20,7 +20,7 @@ env:
   ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
   ARM_CLIENT_SECRET: "${{ secrets.ARM_CLIENT_SECRET }}"
   tf_actions_working_dir: .terraform 
-  tfstate_filename: "github-worker.tfstate"
+  STATEFILENAME: "github-worker.tfstate"
   STATE_RG_NAME: ${{ vars.STATE_RG_NAME }}
   STATE_SA_NAME: ${{ vars.STATE_SA_NAME }}
 
