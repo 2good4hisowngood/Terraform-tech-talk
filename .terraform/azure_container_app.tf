@@ -23,9 +23,9 @@ resource "azurerm_container_app" "example" {
   resource_group_name          = azurerm_resource_group.example.name
   revision_mode                = "Single"
   registry {
-    server   = "example.azurecr.io"
-    username = "example"
-    password = "example"
+    server   = var.acr_server
+    username = var.acr_username
+    password = var.acr_password
   }
 
   template {
