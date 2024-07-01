@@ -27,7 +27,7 @@ jobs:
           image: github_runner_container
           git_access_token: ${{ secrets.GITHUB_TOKEN }}
           folder: ./containers/github_runner_container/
-          dockerfile: ./containers/github_runner_container/Dockerfile
+          # dockerfile: ./containers/github_runner_container/Dockerfile
           branch: main
           tag: latest
           # build_args: '[{"arg_one":"value_one"}, {"arg_two":"value_two"}]'
