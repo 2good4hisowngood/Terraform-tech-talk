@@ -8,8 +8,8 @@ data "github_repositories" "example" {
   include_repo_id = true
 }
 
-resource "github_actions_runner_group" "example" {
-  name                    = "${var.org_name}-runners"
-  visibility              = "selected"
-  selected_repository_ids = tolist(data.github_repositories.example.repositories[*].id) # [github_repository.example.repo_id]
-}
+# resource "github_actions_runner_group" "example" {
+#   name                    = "${var.org_name}-runners"
+#   visibility              = "selected"
+#   selected_repository_ids = tolist(data.github_repositories.example.repositories[*].id) # [github_repository.example.repo_id]
+# }
