@@ -23,6 +23,7 @@ env:
   STATEFILENAME: github-worker.tfstate
   STATE_RG_NAME: ${{ vars.STATE_RG_NAME }}
   STATE_SA_NAME: ${{ vars.STATE_SA_NAME }}
+  TF_VAR_org_name: $GITHUB_REPOSITORY_OWNER
 
 jobs:
   terraform-plan:
@@ -30,13 +31,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       #this is needed since we are running terraform with read-only permissions
-      ARM_SKIP_PROVIDER_REGISTRATION: true
-      TF_VAR_GitHub_API_TOKEN: "${{ secrets.GITHUB_API_TOKEN }}"
+      ARM_SKIP_PROVIDER_REGISTRATION: true      
     outputs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
     defaults:
       run:
-        working-directory: ${{ env.tf_actions_working_dir }} 
+        working-directory: ${{ env.tf_actions_working_dir }}
         # -backend-config="key=${{ env.STATEFILENAME }}" -backend-config="container_name=tfstate" -backend-config="resource_group_name=${{ vars.STATE_RG_NAME }}" -backend-config="storage_account_name=${{ vars.STATE_SA_NAME }}"
 
     steps:
@@ -66,7 +66,7 @@ jobs:
       id: tf-plan
       run: |
         export exitcode=0
-        terraform plan -detailed-exitcode -no-color -out tfplan -var "Github_api_token=${{ secrets.GITHUB_API_TOKEN }}" || export exitcode=$?
+        terraform plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
 
         echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
         
