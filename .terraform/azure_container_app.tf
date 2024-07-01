@@ -64,7 +64,7 @@ data "azurerm_container_registry" "example" {
 }
 
 resource "azurerm_role_assignment" "example" {
-  scope                = data.azurerm_subscription.primary.id
+  scope                = data.azurerm_container_registry.example.id
   role_definition_name = "acrPull"
   principal_id         = azurerm_user_assigned_identity.example.principal_id
 }
