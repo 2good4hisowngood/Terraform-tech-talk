@@ -1,0 +1,60 @@
+name: 'Terraform Unit Tests'
+
+on:
+  push:
+
+env:
+  tf_actions_working_dir: .terraform
+  org_name: $GITHUB_REPOSITORY_OWNER
+
+jobs:
+  terraform-unit-tests:
+    name: 'Terraform Unit Tests'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.tf_actions_working_dir }}
+    
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      # with:
+      #   tf_actions_working_dir: "${{ env.tf_actions_working_dir }}"
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform init -backend=false
+      # with:
+      #   tf_actions_working_dir: "${{ env.tf_actions_working_dir }}"
+
+    # Validate terraform files
+    - name: Terraform Validate
+      run: terraform validate # -var="org_name=${{ env.org_name }}"
+      # with:
+      #   tf_actions_working_dir: "${{ env.tf_actions_working_dir }}"
+
+    # Checks that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Format
+      run: terraform fmt -recursive
+      # with:
+      #   tf_actions_working_dir: "${{ env.tf_actions_working_dir }}"
+    
+    # Perform a security scan of the terraform code using checkov
+    - name: Run Checkov action
+      id: checkov
+      uses: bridgecrewio/checkov-action@master
+      with: 
+        framework: terraform
+
+    # # Upload results to GitHub Advanced Security
+    # - name: Upload SARIF file
+    #   if: success() || failure()
+    #   uses: github/codeql-action/upload-sarif@v2
+    #   with:
+    #     sarif_file: results.sarif
+    #     category: checkov
