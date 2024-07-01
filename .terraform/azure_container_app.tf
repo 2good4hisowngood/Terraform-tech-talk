@@ -58,3 +58,13 @@ resource "azurerm_user_assigned_identity" "example" {
   resource_group_name = azurerm_resource_group.example.name
 }
 
+data "azurerm_container_registry" "example" {
+  name                = var.acr_server
+  resource_group_name = var.acr_rg
+}
+
+resource "azurerm_role_assignment" "example" {
+  scope                = data.azurerm_subscription.primary.id
+  role_definition_name = "acrPull"
+  principal_id         = azurerm_user_assigned_identity.example.principal_id
+}
