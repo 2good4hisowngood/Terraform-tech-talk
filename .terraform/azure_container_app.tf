@@ -22,11 +22,16 @@ resource "azurerm_container_app" "example" {
   container_app_environment_id = azurerm_container_app_environment.example.id
   resource_group_name          = azurerm_resource_group.example.name
   revision_mode                = "Single"
+  registry {
+    server   = "example.azurecr.io"
+    username = "example"
+    password = "example"
+  }
 
   template {
     container {
       name   = "examplecontainerapp"
-      image  = var.image_name # "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest"
+      image  = var.image_name
       cpu    = 0.25
       memory = "0.5Gi"
     }
