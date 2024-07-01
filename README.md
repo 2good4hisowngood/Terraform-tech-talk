@@ -12,6 +12,7 @@ Create selfhosted worker page: https://github.com/organizations/hungerrush/setti
 Manually created resources:
 - Service Principle | App Registration - Given scoped access to create resources on subscription.
 - Storage Account where state files can be stored with a tfstate container.
+- Set org_name to repo owner name
 
 Resources to deploy
 Azurerm
