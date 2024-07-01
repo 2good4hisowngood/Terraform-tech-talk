@@ -31,7 +31,7 @@ resource "azurerm_container_app" "example" {
   }
   registry {
     server   = var.acr_server
-    identity = azurerm_container_app_environment.example.identity
+    identity = azurerm_user_assigned_identity.example.id
   }
 
   template {
@@ -46,7 +46,7 @@ resource "azurerm_container_app" "example" {
       }
       env {
         name = TOKEN
-        value = var.org_name
+        value = "test"
       }
     }
   }
