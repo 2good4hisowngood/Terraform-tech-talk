@@ -5,7 +5,7 @@ on:
 
 env:
   tf_actions_working_dir: .terraform
-  org_name: ${{ env.GITHUB_REPOSITORY_OWNER}}
+  org_name: ${{ GITHUB_REPOSITORY_OWNER}}
 
 jobs:
   terraform-unit-tests:
