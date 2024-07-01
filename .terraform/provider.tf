@@ -13,6 +13,12 @@ terraform {
       version = "0.11.2"
     }
   }
+  backend "azurerm" {
+      resource_group_name  = "DevOpsAutomationRG"
+      storage_account_name = "devopsautomationrgsa"
+      container_name       = "tfstate"
+      key                  = "dev-cloudflare-records.tfstate"
+  }
 }
 
 provider "azurerm" {
