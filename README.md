@@ -25,3 +25,4 @@ Azure Credentials
     subscription
     tenant
 GitHub values
+    Org name
