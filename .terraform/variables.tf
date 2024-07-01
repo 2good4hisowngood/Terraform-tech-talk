@@ -1,5 +1,5 @@
 # Azure Variables
-variable "image_name {
+variable "image_name" {
   description = "The name of the image to deploy"
   type        = string
 }
