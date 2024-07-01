@@ -17,7 +17,7 @@ env:
   ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
   ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
   ARM_CLIENT_SECRET: "${{ secrets.ARM_CLIENT_SECRET }}"
-  tf_actions_working_dir: /terraform
+  tf_actions_working_dir: .terraform
 
 jobs:
   terraform-plan:
