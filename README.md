@@ -9,6 +9,9 @@ Make terraform variables for token and organization name
 Github Repo for Github actions worker https://github.com/actions/runner/blob/main/.github/workflows/publish-image.yml 
 Create selfhosted worker page: https://github.com/organizations/hungerrush/settings/actions/runners/new?arch=x64&os=linux
 
+Manually created resources:
+- Service Principle | App Registration - Given scoped access to create resources on subscription.
+
 Resources to deploy
 Azurerm
 - Resource Group
@@ -20,9 +23,11 @@ Github
 
 Secrets:
 Azure Credentials
-    Secret
-    appid
-    subscription
-    tenant
+    ARM_CLIENT_SECRET
+    AZURE_CLIENT_ID
+    AZURE_SUBSCRIPTION_ID
+    AZURE_TENANT_ID
 GitHub values
-    Org name
+
+Variables:
+    Org name - GitHub Org/User name
