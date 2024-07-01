@@ -53,15 +53,12 @@ jobs:
     - name: Terraform Init
       run: terraform init
       with:
-        tf_actions_working_dir: "${{ env.tf_actions_working_dir }}"
         args: '-backend-config="key=${{ env.REPO_NAME }}.tfstate" -backend-config="container_name=tfstate"'
 
     # Checks that all Terraform configuration files adhere to a canonical format
     # Will fail the build if not
     - name: Terraform Format
       run: terraform fmt
-      with:
-        tf_actions_working_dir: "${{ env.tf_actions_working_dir }}"
 
     # Generates an execution plan for Terraform
     # An exit code of 0 indicated no changes, 1 a terraform failure, 2 there are pending changes.
