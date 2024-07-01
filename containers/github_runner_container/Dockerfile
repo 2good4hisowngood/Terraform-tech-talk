@@ -16,7 +16,7 @@ RUN cd /home/docker && mkdir actions-runner && cd actions-runner \
 
 RUN chown -R docker ~docker && /home/docker/actions-runner/bin/installdependencies.sh
 
-COPY start.sh start.sh
+COPY ./containers/github_runner_container/start.sh start.sh
 
 # make the script executable
 RUN chmod +x start.sh

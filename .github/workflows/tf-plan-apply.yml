@@ -24,6 +24,7 @@ env:
   STATE_RG_NAME: ${{ vars.STATE_RG_NAME }}
   STATE_SA_NAME: ${{ vars.STATE_SA_NAME }}
   TF_VAR_org_name: "2good4hisowngood"
+  TF_VAR_image_name: ${{ vars.ACR_IMAGE }}
 
 jobs:
   terraform-plan:
