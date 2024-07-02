@@ -20,7 +20,7 @@ resource "azurerm_container_app_environment" "example" {
 
 resource "azurerm_container_app" "example" {
   for_each                     = toset(data.github_repositories.example.full_names)
-  name                         = "${each.value}-github-runner"
+  name                         = substr(lower("${each.value}-gh-runr"), 0, 32)
   container_app_environment_id = azurerm_container_app_environment.example.id
   resource_group_name          = azurerm_resource_group.example.name
   revision_mode                = "Single"
