@@ -18,9 +18,15 @@ resource "azurerm_container_app_environment" "example" {
   log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
 }
 
+locals {
+  truncated_repo_names = [
+    for repo in data.github_repositories.example.full_names : substr(element(split("/", repo), 1), 0, 15)
+  ]
+}
+
 resource "azurerm_container_app" "example" {
-  for_each                     = toset(data.github_repositories.example.full_names)
-  name                         = substr(lower("${each.value}-gh-runr"), 0, 32)
+  for_each                     = toset(local.truncated_repo_names)
+  name                         = "${each.value}-github-runner"
   container_app_environment_id = azurerm_container_app_environment.example.id
   resource_group_name          = azurerm_resource_group.example.name
   revision_mode                = "Single"
