@@ -19,7 +19,8 @@ resource "azurerm_container_app_environment" "example" {
 }
 
 resource "azurerm_container_app" "example" {
-  name                         = "example-app"
+  for_each                     = data.github_repositories.example.full_names
+  name                         = "${each.value}-github-runner"
   container_app_environment_id = azurerm_container_app_environment.example.id
   resource_group_name          = azurerm_resource_group.example.name
   revision_mode                = "Single"
@@ -42,7 +43,7 @@ resource "azurerm_container_app" "example" {
       memory = "0.5Gi"
       env {
         name  = "REPO"
-        value = "2good4hisowngood/Terraform-tech-talk"
+        value = each.value
       }
       env {
         name = "TOKEN"
