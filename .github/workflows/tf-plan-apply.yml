@@ -43,8 +43,7 @@ jobs:
     defaults:
       run:
         working-directory: ${{ env.tf_actions_working_dir }}
-        # -backend-config="key=${{ env.STATEFILENAME }}" -backend-config="container_name=tfstate" -backend-config="resource_group_name=${{ vars.STATE_RG_NAME }}" -backend-config="storage_account_name=${{ vars.STATE_SA_NAME }}"
-
+        
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout

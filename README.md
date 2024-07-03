@@ -1,6 +1,8 @@
 # Terraform-tech-talk
 Presentation and tech demo
 
+To demonstrate Terraform, this repo grabs all repository names under an org, and creates a consumption azure container environment, with container apps for each repo. Each container app is loaded with a github runner scoped to one of the repos.
+
 Sources:
 Azure Container App Terraform Module - https://github.com/Azure/terraform-azure-container-apps 
 Github action runner guide: https://baccini-al.medium.com/how-to-containerize-a-github-actions-self-hosted-runner-5994cc08b9fb
