@@ -130,33 +130,20 @@ jobs:
                 body: body
             })
 
-    - name: Create Graph Output
-      id: tf-graph-string
-      run: |
-        delimiter="$(openssl rand -hex 8)"
-        echo "GRAPH_SUMMARY<<${delimiter}" >> $GITHUB_ENV
-        echo "## Terraform Graph Output" >> $GITHUB_ENV
-        echo "<details><summary>Click to expand</summary>" >> $GITHUB_ENV
-        echo "" >> $GITHUB_ENV
-        echo '![Terraform Graph](graph.svg)' >> $GITHUB_ENV
-        echo "</details>" >> $GITHUB_ENV
-        echo "${delimiter}" >> $GITHUB_ENV
-
-    - name: Push Terraform Graph to PR
-      if: github.ref != 'refs/heads/main'
-      uses: actions/github-script@v6
-      env:
-        GRAPH_SUMMARY: ${{ env.GRAPH_SUMMARY }}
+    - uses: actions/checkout@v3
+    - uses: asannou/tfmermaid-action@v1
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const body = `${process.env.GRAPH_SUMMARY}`;
-          github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: body
-          })
+        file: README.md
+    - name: commit
+      run: |
+        git add README.md
+        if ! git diff --cached --quiet --exit-code
+        then
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "generated"
+          git push
+        fi
 
   terraform-apply:
     name: 'Terraform Apply'
