@@ -151,8 +151,10 @@ jobs:
           git commit -m "generated"
           git push origin HEAD:${{ github.ref_name }}
         fi
-
-    - name: Generate Terraform graph
+        
+    - name: Install Graphviz
+      run: sudo apt-get update && sudo apt-get install -y graphviz
+    - name: 'Generate Terraform graph'
       run: terraform graph | dot -Tsvg > graph.svg
 
     - name: Commit and Push Terraform graph
