@@ -89,51 +89,6 @@ jobs:
         name: tfplan
         path: ./.terraform
 
-    # - name: Create Graph Output
-    #       id: tf-graph-string
-    #       run: |
-    #         echo "## Terraform Graph Output" >> $GITHUB_OUTPUT
-    #         echo "<details><summary>Click to expand</summary>" >> $GITHUB_OUTPUT
-    #         echo "" >> $GITHUB_OUTPUT
-    #         echo '![Terraform Graph](graph.svg)' >> $GITHUB_OUTPUT
-    #         echo "</details>" >> $GITHUB_OUTPUT
-
-    # Publish Terraform Plan as task summary
-    # - name: Publish Terraform Plan to Task Summary
-    #   env:
-    #     SUMMARY: ${{ steps.tf-plan-string.outputs.summary }}
-    #   run: |
-    #     echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
-
-    # Create string output of Terraform Plan
-    # - name: Create Graph Output
-    #   id: tf-graph-string
-    #   run: |
-    #     delimiter="$(openssl rand -hex 8)"
-    #     echo "GRAPH_SUMMARY<<${delimiter}" >> $GITHUB_ENV
-    #     echo "## Terraform Graph Output" >> $GITHUB_ENV
-    #     echo "<details><summary>Click to expand</summary>" >> $GITHUB_ENV
-    #     echo "" >> $GITHUB_ENV
-    #     echo '![Terraform Graph](graph.svg)' >> $GITHUB_ENV
-    #     echo "</details>" >> $GITHUB_ENV
-    #     echo "${delimiter}" >> $GITHUB_ENV
-
-    # - name: Push Terraform Graph to PR
-    #   if: github.ref != 'refs/heads/main'
-    #   uses: actions/github-script@v6
-    #   env:
-    #     GRAPH_SUMMARY: "${{ env.GRAPH_SUMMARY }}"
-    #   with:
-    #     github-token: ${{ secrets.GITHUB_TOKEN }}
-    #     script: |
-    #       const body = `${process.env.GRAPH_SUMMARY}`;
-    #       github.rest.issues.createComment({
-    #           issue_number: context.issue.number,
-    #           owner: context.repo.owner,
-    #           repo: context.repo.repo,
-    #           body: body
-    #       })
-
     - name: Create Graph Output
       id: tf-graph-string
       run: |
