@@ -20,7 +20,8 @@ resource "azurerm_container_app_environment" "example" {
 
 locals {
   truncated_repo_names = [
-    for repo in data.github_repositories.example.full_names : substr(element(split("/", repo), 1), 0, 15)
+#     for repo in data.github_repositories.example.full_names : substr(element(split("/", repo), 1), 0, 15)
+    for repo in data.github_repositories.example.full_names : regex_replace("^(.{1,14})-?$", "${1}", substr(element(split("/", repo), 1), 0, 15))
   ]
 }
 
