@@ -133,6 +133,7 @@ jobs:
     - uses: asannou/tfmermaid-action@v1
       with:
         file: .terraform/README.md
+        working-directory: ${{ env.tf_actions_working_dir }}
     - name: commit
       run: |
         git add README.md
