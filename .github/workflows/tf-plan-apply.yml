@@ -130,7 +130,6 @@ jobs:
                 body: body
             })
 
-    - uses: actions/checkout@v3
     - uses: asannou/tfmermaid-action@v1
       with:
         file: README.md
