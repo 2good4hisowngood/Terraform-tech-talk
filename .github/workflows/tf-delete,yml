@@ -1,7 +1,7 @@
 name: 'Terraform delete'
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
 
 #Special permissions required for OIDC authentication
 permissions:
