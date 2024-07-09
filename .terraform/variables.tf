@@ -29,6 +29,7 @@ variable "acr_rg" {
 variable "token" {
   description = "The GitHub token"
   type        = string
+  sensitive   = true
 }
 
 # GitHub Variables
