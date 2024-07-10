@@ -133,36 +133,6 @@ jobs:
                 body: body
             })
 
-    # - uses: actions/checkout@v3
-    #   with:
-    #     path: ${{ env.tf_actions_working_dir }}
-    - uses: asannou/tfmermaid-action@v1
-      with:
-        file: README.md
-        # working-directory: ${{ env.tf_actions_working_dir }}
-    - name: commit
-      run: |
-        git add README.md
-        if ! git diff --cached --quiet --exit-code
-        then
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "generated"
-          git push origin HEAD:${{ github.ref_name }}
-        fi
-        
-    - name: Install Graphviz
-      run: sudo apt-get update && sudo apt-get install -y graphviz
-    - name: 'Generate Terraform graph'
-      run: terraform graph | dot -Tsvg > graph.svg
-
-    - name: Commit and Push Terraform graph
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add graph.svg
-        git commit -m 'Update Terraform graph'
-        git push
 
 
   terraform-apply:
