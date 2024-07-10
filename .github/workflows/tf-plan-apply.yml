@@ -132,6 +132,8 @@ jobs:
                 repo: context.repo.repo,
                 body: body
             })
+            
+
 
 
 
@@ -167,3 +169,15 @@ jobs:
     # Terraform Apply
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
+
+    # Terraform Graph and add to repo
+    - name: 'Generate Terraform graph'
+      run: terraform graph | dot -Tsvg > graph.svg
+
+    - name: Commit and Push Terraform graph
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add graph.svg
+        git commit -m 'Update Terraform graph'
+        git push
