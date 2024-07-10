@@ -1,6 +1,16 @@
 name: Generate terraform docs
 on:
-  - pull_request
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+  workflow_dispatch:
+
+permissions:
+      contents: write
+      pull-requests: write
 
 permissions:
       contents: write
