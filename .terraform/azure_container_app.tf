@@ -38,7 +38,7 @@ resource "azurerm_container_app_environment" "example" {
 
 locals {
   truncated_repo_names = {
-    for repo in data.github_repositories.example.repositories.names :
+    for repo in data.github_repositories.example.names :
     repo => length(substr(repo, 0, 15)) == 15 && substr(repo, 14, 1) == "-" ? 
       substr(repo, 0, 14) : 
       substr(repo, 0, 15)
