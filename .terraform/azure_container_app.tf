@@ -20,12 +20,20 @@ resource "azurerm_container_app_environment" "example" {
 
 locals {
   truncated_repo_names = [
-#     for repo in data.github_repositories.example.full_names : substr(element(split("/", repo), 1), 0, 15)
     for repo in data.github_repositories.example.full_names : 
     length(substr(element(split("/", repo), 1), 0, 15)) == 15 && substr(element(split("/", repo), 1), 14, 1) == "-" ? 
       substr(element(split("/", repo), 1), 0, 14) : 
       substr(element(split("/", repo), 1), 0, 15)
   ]
+}
+# Truncate repository names to meet Azure naming requirements
+locals {
+  truncated_repo_names = {
+    for repo in data.github_repositories.example.full_names :
+    repo => length(substr(element(split("/", repo), 1), 0, 15)) == 15 && substr(element(split("/", repo), 1), 14, 1) == "-" ? 
+      substr(element(split("/", repo), 1), 0, 14) : 
+      substr(element(split("/", repo), 1), 0, 15)
+  }
 }
 
 resource "azurerm_container_app" "example" {
@@ -56,8 +64,8 @@ resource "azurerm_container_app" "example" {
         value = each.value
       }
       env {
-        name = "TOKEN"
-        value = var.token
+        name  = "TOKEN"
+        value = data.github_actions_registration_token.example[each.key].token # formerly var.token
       }
     }
   }
