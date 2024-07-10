@@ -170,6 +170,10 @@ jobs:
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
 
+    - name: Install Graphviz
+      run: sudo apt-get update && sudo apt-get install -y graphviz
+    - name: 'Generate Terraform graph'
+      run: terraform graph | dot -Tsvg > graph.svg
     # Terraform Graph and add to repo
     - name: 'Generate Terraform graph'
       run: terraform graph | dot -Tsvg > graph.svg
