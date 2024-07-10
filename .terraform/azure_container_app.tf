@@ -27,12 +27,21 @@ resource "azurerm_container_app_environment" "example" {
 #   ]
 # }
 # Truncate repository names to meet Azure naming requirements
+# locals {
+#   truncated_repo_names = {
+#     for repo in data.github_repositories.example.full_names :
+#     repo => length(substr(element(split("/", repo), 1), 0, 15)) == 15 && substr(element(split("/", repo), 1), 14, 1) == "-" ? 
+#       substr(element(split("/", repo), 1), 0, 14) : 
+#       substr(element(split("/", repo), 1), 0, 15)
+#   }
+# }
+
 locals {
   truncated_repo_names = {
-    for repo in data.github_repositories.example.full_names :
-    repo => length(substr(element(split("/", repo), 1), 0, 15)) == 15 && substr(element(split("/", repo), 1), 14, 1) == "-" ? 
-      substr(element(split("/", repo), 1), 0, 14) : 
-      substr(element(split("/", repo), 1), 0, 15)
+    for repo in data.github_repositories.example.repositories.*.name :
+    repo => length(substr(repo, 0, 15)) == 15 && substr(repo, 14, 1) == "-" ? 
+      substr(repo, 0, 14) : 
+      substr(repo, 0, 15)
   }
 }
 
@@ -61,7 +70,7 @@ resource "azurerm_container_app" "example" {
       memory = "0.5Gi"
       env {
         name  = "REPO"
-        value = each.value
+        value = each.key
       }
       env {
         name  = "TOKEN"

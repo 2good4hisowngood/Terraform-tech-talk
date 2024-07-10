@@ -5,6 +5,6 @@ data "github_repositories" "example" {
 
 # Generate registration tokens for each repository
 data "github_actions_registration_token" "example" {
-  for_each = toset(data.github_repositories.example.full_names)
-  repository = each.value
+  for_each = toset(data.github_repositories.example.repositories.*.name)
+  repository = "${var.org_name}/${each.value}"
 }
