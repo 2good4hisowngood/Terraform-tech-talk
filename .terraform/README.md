@@ -48,5 +48,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_registration_tokens"></a> [registration\_tokens](#output\_registration\_tokens) | n/a |
 | <a name="output_repositories"></a> [repositories](#output\_repositories) | n/a |
 <!-- END_TF_DOCS -->
