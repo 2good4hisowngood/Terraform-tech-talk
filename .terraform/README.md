@@ -29,6 +29,7 @@ No modules.
 | [azurerm_user_assigned_identity.example](https://registry.terraform.io/providers/hashicorp/azurerm/3.105.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.105.0/docs/data-sources/client_config) | data source |
 | [azurerm_container_registry.example](https://registry.terraform.io/providers/hashicorp/azurerm/3.105.0/docs/data-sources/container_registry) | data source |
+| [github_actions_registration_token.example](https://registry.terraform.io/providers/integrations/github/6.2.2/docs/data-sources/actions_registration_token) | data source |
 | [github_repositories.example](https://registry.terraform.io/providers/integrations/github/6.2.2/docs/data-sources/repositories) | data source |
 
 ## Inputs
