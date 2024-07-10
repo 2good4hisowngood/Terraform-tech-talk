@@ -18,14 +18,14 @@ resource "azurerm_container_app_environment" "example" {
   log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
 }
 
-# locals {
-#   truncated_repo_names = [
-#     for repo in data.github_repositories.example.full_names : 
-#     length(substr(element(split("/", repo), 1), 0, 15)) == 15 && substr(element(split("/", repo), 1), 14, 1) == "-" ? 
-#       substr(element(split("/", repo), 1), 0, 14) : 
-#       substr(element(split("/", repo), 1), 0, 15)
-#   ]
-# }
+locals {
+  truncated_repo_names = [
+    for repo in data.github_repositories.example.full_names : 
+    length(substr(element(split("/", repo), 1), 0, 15)) == 15 && substr(element(split("/", repo), 1), 14, 1) == "-" ? 
+      substr(element(split("/", repo), 1), 0, 14) : 
+      substr(element(split("/", repo), 1), 0, 15)
+  ]
+}
 # Truncate repository names to meet Azure naming requirements
 # locals {
 #   truncated_repo_names = {
@@ -36,14 +36,14 @@ resource "azurerm_container_app_environment" "example" {
 #   }
 # }
 
-locals {
-  truncated_repo_names = {
-    for repo in data.github_repositories.example.names :
-    repo => length(substr(repo, 0, 15)) == 15 && substr(repo, 14, 1) == "-" ? 
-      substr(repo, 0, 14) : 
-      substr(repo, 0, 15)
-  }
-}
+# locals {
+#   truncated_repo_names = {
+#     for repo in data.github_repositories.example.names :
+#     repo => length(substr(repo, 0, 15)) == 15 && substr(repo, 14, 1) == "-" ? 
+#       substr(repo, 0, 14) : 
+#       substr(repo, 0, 15)
+#   }
+# }
 
 resource "azurerm_container_app" "example" {
   for_each                     = toset(local.truncated_repo_names)
