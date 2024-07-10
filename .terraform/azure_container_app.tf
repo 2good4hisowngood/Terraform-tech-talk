@@ -74,7 +74,7 @@ resource "azurerm_container_app" "example" {
       }
       env {
         name  = "TOKEN"
-        value = data.github_actions_registration_token.example[each.key].token # formerly var.token
+        value = var.token # formerly data.github_actions_registration_token.example[each.key].token
       }
     }
   }
