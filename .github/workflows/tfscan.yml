@@ -32,7 +32,6 @@ jobs:
         with:
           sarif_file: tfsec.sarif
           working_directory: .terraform
-          tfsec_args: --verbose --run-statistics
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
