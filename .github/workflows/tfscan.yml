@@ -38,14 +38,3 @@ jobs:
         with:
           # Path to SARIF file relative to the root of the repository
           sarif_file: tfsec.sarif
-
-      - name: Initialize and Analyze IaC
-        id: codeql_iac
-        uses: advanced-security/codeql-extractor-iac@main
-        with:
-          source-root: .terraform
-
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: ${{ steps.codeql_iac.outputs.sarif }}
