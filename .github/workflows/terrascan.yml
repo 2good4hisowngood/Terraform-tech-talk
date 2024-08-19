@@ -1,4 +1,4 @@
-name: "Terraform Scan"
+name: "TerraScan"
 on:
   push:
     branches:
