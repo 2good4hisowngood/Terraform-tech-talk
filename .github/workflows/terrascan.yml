@@ -1,3 +1,4 @@
+name: "Terraform Scan"
 on:
   push:
     branches:
@@ -20,7 +21,7 @@ jobs:
       with:
         iac_type: 'terraform'
         iac_version: 'v14'
-        policy_type: 'aws'
+        policy_type: 'azure'
         only_warn: true
         sarif_upload: true
         #non_recursive:
