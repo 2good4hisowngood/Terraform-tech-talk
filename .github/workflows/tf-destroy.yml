@@ -78,7 +78,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: tfplan
-        path: ./.terraform
+        path: ./${{ env.tf_actions_working_dir }}
         
 
 
@@ -109,7 +109,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: tfplan
-        path: ./.terraform
+        path: ./${{ env.tf_actions_working_dir }}
 
     # Terraform Destroy
     - name: Terraform Destroy
